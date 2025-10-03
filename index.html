@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rahul Yadav — Visual Artist & Designer</title>
+  <meta name="description" content="Portfolio landing page for Rahul Yadav — Visual Artist & Designer specializing in visual communication, presentation systems, 3D illustration, and animation." />
+  <meta name="theme-color" content="#0f172a" />
+  <meta property="og:title" content="Rahul Yadav — Visual Artist & Designer" />
+  <meta property="og:description" content="Visual communication, presentation systems, 3D illustration, and animation." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%230ea5e9'/%3E%3Cstop offset='1' stop-color='%237c3aed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='16' fill='url(%23g)'/%3E%3Ctext x='50' y='62' font-size='54' text-anchor='middle' fill='white' font-family='Arial,Helvetica,sans-serif'%3ERY%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* -----------------------------
+       DESIGN SYSTEM (CSS Variables)
+       ----------------------------- */
+    :root {
+      --bg: #0b1020;          /* deep slate */
+      --surface: #0f172a;     /* card bg */
+      --elev: #111827;        /* elevated */
+      --text: #e5e7eb;        /* base text */
+      --muted: #9ca3af;       /* secondary */
+      --brandA: #0ea5e9;      /* cyan */
+      --brandB: #7c3aed;      /* purple */
+      --accent: #22d3ee;      /* light cyan */
+      --ok: #10b981;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --ring: 0 0 0 3px color-mix(in oklab, var(--brandA) 25%, transparent);
+
+      /* Fluid Type Scale */
+      --step--2: clamp(.72rem, calc(.66rem + .2vw), .82rem);
+      --step--1: clamp(.86rem, calc(.8rem + .25vw), .95rem);
+      --step-0: clamp(1rem, calc(.95rem + .35vw), 1.125rem);
+      --step-1: clamp(1.25rem, calc(1.05rem + .9vw), 1.5rem);
+      --step-2: clamp(1.56rem, calc(1.2rem + 1.4vw), 2rem);
+      --step-3: clamp(1.95rem, calc(1.4rem + 2.1vw), 2.6rem);
+      --step-4: clamp(2.44rem, calc(1.8rem + 3vw), 3.2rem);
+    }
+
+    /* Light theme (auto) */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --elev: #f1f5f9;
+        --text: #0f172a;
+        --muted: #475569;
+        --shadow: 0 10px 25px rgba(15,23,42,.08);
+      }
+    }
+
+    /* Manual theme override */
+    html.theme-dark { --bg:#0b1020; --surface:#0f172a; --elev:#111827; --text:#e5e7eb; --muted:#9ca3af; color-scheme: dark; }
+    html.theme-light { --bg:#f8fafc; --surface:#ffffff; --elev:#f1f5f9; --text:#0f172a; --muted:#475569; color-scheme: light; }
+
+    /* Global layout */
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text); background: radial-gradient(1200px 600px at 80% -10%, rgba(14,165,233,.18), transparent),
+      radial-gradient(1000px 500px at -10% 10%, rgba(124,58,237,.18), transparent), var(--bg);
+      line-height: 1.6; letter-spacing: 0.01em;
+    }
+
+    .container { width: min(1120px, calc(100% - 2rem)); margin-inline: auto; }
+    .section { padding: clamp(3rem, 6vw, 6rem) 0; }
+
+    /* Header & Nav */
+    header {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px);
+      background: color-mix(in oklab, var(--bg) 70%, transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem 0; }
+    .brand { display: flex; align-items: center; gap: .8rem; text-decoration: none; color: inherit; }
+    .logo { width: 36px; height: 36px; border-radius: 10px; background:
+      conic-gradient(from 220deg, var(--brandA), var(--brandB)); display: grid; place-items: center; box-shadow: var(--shadow);}
+    .logo svg { width: 22px; height: 22px; filter: drop-shadow(0 3px 6px rgba(0,0,0,.2)); }
+    nav ul { list-style: none; display: flex; gap: 1rem; padding: 0; margin: 0; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 600; padding: .6rem .8rem; border-radius: 10px; }
+    nav a:hover, nav a:focus-visible { color: var(--text); background: color-mix(in oklab, var(--surface) 85%, transparent); outline: none; box-shadow: var(--ring); }
+
+    .actions { display:flex; gap:.5rem; align-items:center; }
+    .btn { appearance:none; border:none; padding:.7rem 1rem; border-radius: 12px; font-weight:700; cursor:pointer; transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease; }
+    .btn.primary { background: linear-gradient(135deg, var(--brandA), var(--brandB)); color:white; box-shadow: var(--shadow); }
+    .btn.ghost { background: transparent; color: var(--text); border:1px solid color-mix(in oklab, var(--text) 16%, transparent); }
+    .btn:hover { transform: translateY(-2px); }
+
+    /* Mobile nav */
+    .menu-toggle { display:none; }
+    @media (max-width: 800px) {
+      nav ul { display:none; position:absolute; top:64px; right:1rem; padding: .6rem; background: var(--surface); border:1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius: 12px; box-shadow: var(--shadow); }
+      nav ul.open { display:grid; gap:.3rem; }
+      .menu-toggle { display:inline-flex; }
+    }
+
+    /* Hero */
+    .hero { display:grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; }
+    .kicker { color: var(--accent); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: var(--step--1); }
+    h1 { font-size: var(--step-4); line-height: 1.1; margin: .4rem 0 1rem; letter-spacing: -0.02em; }
+    .lede { font-size: var(--step-0); color: var(--muted); max-width: 60ch; }
+    .hero .cta { margin-top: 1.4rem; display:flex; gap:.8rem; flex-wrap: wrap; }
+
+    .hero-art { position: relative; aspect-ratio: 1 / 1; border-radius: var(--radius); overflow:hidden; background: linear-gradient(135deg, color-mix(in oklab, var(--brandA) 35%, transparent), color-mix(in oklab, var(--brandB) 35%, transparent)), radial-gradient(600px 300px at 20% 20%, rgba(255,255,255,.08), transparent); box-shadow: var(--shadow); }
+    .blob { position:absolute; inset:auto; width: 52%; height: 52%; border-radius: 40% 60% 70% 30% / 30% 40% 60% 70%; filter: blur(18px); opacity:.75; }
+    .blob.a { background: color-mix(in oklab, var(--brandA) 70%, white 10%); top: 10%; left: 8%; animation: float 7s ease-in-out infinite; }
+    .blob.b { background: color-mix(in oklab, var(--brandB) 70%, white 10%); bottom: 8%; right: 8%; animation: float 8.5s ease-in-out infinite reverse; }
+    .grid { position:absolute; inset:0; background-image: linear-gradient(transparent 96%, color-mix(in oklab, var(--text) 8%, transparent) 96%), linear-gradient(90deg, transparent 96%, color-mix(in oklab, var(--text) 8%, transparent) 96%); background-size: 26px 26px; mix-blend-mode: overlay; opacity:.6; }
+
+    @keyframes float { 0%,100%{ transform: translateY(0)} 50%{ transform: translateY(-10px) }}
+
+    @media (max-width: 960px) { .hero { grid-template-columns: 1fr; } .hero-art { order: -1; } }
+
+    /* Principle Cards */
+    .cards { display:grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; margin-top: 3rem; }
+    .card { grid-column: span 4; background: var(--surface); padding: 1.1rem; border-radius: 16px; border:1px solid color-mix(in oklab, var(--text) 10%, transparent); box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,.25); }
+    .card h3 { margin:.2rem 0 .4rem; letter-spacing: .01em; font-size: 1.05rem; }
+    .card p { margin:0; color: var(--muted); font-size: var(--step--1); }
+    .chip { display:inline-flex; align-items:center; gap:.4rem; font-size: .8rem; padding: .28rem .6rem; border-radius:999px; background: color-mix(in oklab, var(--brandA) 15%, transparent); border:1px solid color-mix(in oklab, var(--brandA) 30%, transparent); color: color-mix(in oklab, var(--text) 90%, white 10%); }
+    @media (max-width: 960px) { .card{ grid-column: span 6 } }
+    @media (max-width: 640px) { .card{ grid-column: span 12 } }
+
+    /* Gallery */
+    .gallery { display:grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; }
+    .tile { position:relative; grid-column: span 4; aspect-ratio: 4/3; border-radius: 16px; overflow:hidden; background: linear-gradient(135deg, color-mix(in oklab, var(--brandA) 35%, transparent), color-mix(in oklab, var(--brandB) 35%, transparent)); box-shadow: var(--shadow); }
+    .tile::after { content:""; position:absolute; inset:0; background: radial-gradient(600px 300px at 70% 20%, rgba(255,255,255,.18), transparent); mix-blend-mode: overlay; }
+    .tile-caption { position:absolute; left:12px; bottom:12px; right:12px; background: color-mix(in oklab, var(--surface) 85%, transparent); padding:.6rem .8rem; border-radius: 12px; font-weight:600; display:flex; align-items:center; justify-content:space-between; border:1px solid color-mix(in oklab, var(--text) 10%, transparent) }
+    @media (max-width: 960px) { .tile{ grid-column: span 6 } }
+    @media (max-width: 640px) { .tile{ grid-column: span 12 } }
+
+    /* Process */
+    .process { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; counter-reset: step; }
+    .step { background: var(--surface); padding: 1rem; border-radius: 14px; border:1px solid color-mix(in oklab, var(--text) 10%, transparent); position: relative; }
+    .step::before { counter-increment: step; content: counter(step); position:absolute; top:-12px; left:-12px; width:36px; height:36px; display:grid; place-items:center; background: linear-gradient(135deg, var(--brandA), var(--brandB)); color:white; border-radius: 10px; box-shadow: var(--shadow); font-weight:800; }
+    @media (max-width: 960px){ .process{ grid-template-columns: repeat(2,1fr);} }
+    @media (max-width: 640px){ .process{ grid-template-columns: 1fr;} }
+
+    /* Split sections */
+    .split { display:grid; grid-template-columns: 1.1fr 1fr; gap:2rem; align-items:center; }
+    @media (max-width: 960px) { .split { grid-template-columns: 1fr; } }
+
+    /* Footer */
+    footer { border-top:1px solid color-mix(in oklab, var(--text) 10%, transparent); padding: 2.5rem 0 3rem; color: var(--muted); }
+
+    /* Accessibility helpers */
+    :focus-visible { outline: none; box-shadow: var(--ring); }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: 0ms !important; scroll-behavior: auto !important; } }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Rahul Yadav",
+    "jobTitle": "Visual Artist & Designer",
+    "address": {"@type": "PostalAddress", "addressLocality": "Gurugram", "addressRegion": "Haryana", "addressCountry": "IN"},
+    "email": "mailto:rahul.yadav.ext@everestgrp.com",
+    "url": "https://example.com/",
+    "knowsAbout": ["Visual communication","3D modeling","3D animation","Presentation systems","Adobe Photoshop","Adobe Illustrator","Autodesk Maya"]
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Rahul Yadav home">
+        <span class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 17L10 4l4 7h7l-5 9H8l2-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <strong>Rahul Yadav</strong>
+      </a>
+      <nav>
+        <button class="btn ghost menu-toggle" aria-expanded="false" aria-controls="menu">Menu</button>
+        <ul id="menu" role="menu">
+          <li role="none"><a role="menuitem" href="#work">Work</a></li>
+          <li role="none"><a role="menuitem" href="#process">Process</a></li>
+          <li role="none"><a role="menuitem" href="#about">About</a></li>
+          <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="actions">
+        <button class="btn ghost" id="themeToggle" aria-pressed="false" title="Toggle theme">Theme</button>
+        <a class="btn primary" href="#contact">Let’s collaborate</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="section container hero" aria-label="Hero">
+      <div>
+        <div class="kicker">Visual Artist & Designer</div>
+        <h1>Design that clarifies complex ideas</h1>
+        <p class="lede">I craft presentation systems, research diagrams, and 3D illustrations that turn dense analysis into visuals leaders can grasp in seconds. Based in Gurugram; experienced with Photoshop, Illustrator, and Autodesk Maya.</p>
+        <div class="cta">
+          <a class="btn primary" href="#work">See selected work</a>
+          <a class="btn ghost" href="#process">My process</a>
+        </div>
+
+        <div class="cards" aria-label="Design principles">
+          <article class="card" tabindex="0">
+            <span class="chip">Hierarchy</span>
+            <h3>Type & spacing that guide the eye</h3>
+            <p>Fluid typographic scale, ruthless alignment, and whitespace to build rhythm and scannability across decks.</p>
+          </article>
+          <article class="card" tabindex="0">
+            <span class="chip">Systems</span>
+            <h3>Reusable components for speed</h3>
+            <p>Grids, color roles, and iconography kits to keep dozens of analysts shipping on-brand visuals quickly.</p>
+          </article>
+          <article class="card" tabindex="0">
+            <span class="chip">Clarity</span>
+            <h3>Story-first diagrams</h3>
+            <p>Complex research distilled into journeys, landscapes, and frameworks that communicate at a glance.</p>
+          </article>
+        </div>
+      </div>
+      <figure class="hero-art" aria-label="Gradient abstract artwork">
+        <div class="blob a"></div>
+        <div class="blob b"></div>
+        <div class="grid" aria-hidden="true"></div>
+      </figure>
+    </section>
+
+    <!-- WORK / GALLERY -->
+    <section id="work" class="section" aria-labelledby="work-title">
+      <div class="container">
+        <div class="split">
+          <div>
+            <h2 id="work-title" style="font-size:var(--step-3); margin-top:0">Selected work</h2>
+            <p class="lede">A snapshot of pieces that represent how I approach brand-consistent presentation design, 3D hero graphics, and diagram systems. (Swap these tiles with your projects/screenshots later.)</p>
+          </div>
+          <div>
+            <ul style="margin:0; padding-left:1.1rem; color:var(--muted)">
+              <li>Executive decks and report covers with reusable components</li>
+              <li>3D product/abstract renders for hero visuals</li>
+              <li>Framework diagrams: maturity models, landscapes, quadrants</li>
+            </ul>
+          </div>
+        </div>
+        <div class="gallery" style="margin-top:2rem">
+          <figure class="tile"><figcaption class="tile-caption">Presentation system <span>→</span></figcaption></figure>
+          <figure class="tile"><figcaption class="tile-caption">3D hero artwork <span>→</span></figcaption></figure>
+          <figure class="tile"><figcaption class="tile-caption">Framework diagram <span>→</span></figcaption></figure>
+          <figure class="tile"><figcaption class="tile-caption">Iconography kit <span>→</span></figcaption></figure>
+          <figure class="tile"><figcaption class="tile-caption">Data storytelling <span>→</span></figcaption></figure>
+          <figure class="tile"><figcaption class="tile-caption">Motion snippet <span>→</span></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process" class="section" aria-labelledby="process-title">
+      <div class="container">
+        <h2 id="process-title" style="font-size:var(--step-3); margin-top:0">A dependable, designerly process</h2>
+        <div class="process" style="margin-top:1.2rem">
+          <article class="step">
+            <h3>Discover</h3>
+            <p>Clarify audience, message, and success criteria. Gather brand constraints and reference decks.</p>
+          </article>
+          <article class="step">
+            <h3>Define</h3>
+            <p>Establish grid, typographic scale, and color roles. Sketch the information architecture.</p>
+          </article>
+          <article class="step">
+            <h3>Design</h3>
+            <p>Create options and micro-experiments. Iterate quickly with feedback rounds.</p>
+          </article>
+          <article class="step">
+            <h3>Deliver</h3>
+            <p>Export polished assets with naming, specs, and source files for reuse across teams.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="container split">
+        <div>
+          <h2 id="about-title" style="font-size:var(--step-3); margin-top:0">About Rahul</h2>
+          <p class="lede">Visual Artist at Everest Group since 2023, with a strong background in animation and visual communication. I turn complex research into elegant stories across slides, diagrams, and lightweight motion.</p>
+          <div class="cards" style="margin-top:1rem">
+            <article class="card"><h3>Core tools</h3><p>Adobe Photoshop · Adobe Illustrator · Autodesk Maya</p></article>
+            <article class="card"><h3>Education</h3><p>Design & Visual Communications — CBSE (2020–2023)<br/>Animation — JIMS Rohini (2020–2023) · Arena Animation</p></article>
+            <article class="card"><h3>Strengths</h3><p>Visual systems, diagram libraries, 3D illustration, presentation design, accessibility-conscious color.</p></article>
+          </div>
+        </div>
+        <aside>
+          <div class="hero-art" aria-hidden="true" style="aspect-ratio:4/5">
+            <div class="blob a" style="top:6%;left:10%;width:58%;height:58%"></div>
+            <div class="blob b" style="bottom:6%;right:8%;width:55%;height:55%"></div>
+            <div class="grid"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="split">
+          <div>
+            <h2 id="contact-title" style="font-size:var(--step-3); margin-top:0">Let’s collaborate</h2>
+            <p class="lede">Have a project in mind or want to level up your presentation visuals? Send a note—I’ll get back quickly.</p>
+            <form id="contactForm" class="card" style="padding:1.2rem" onsubmit="return false" aria-label="Contact form">
+              <label for="name">Name</label>
+              <input id="name" name="name" required placeholder="Your name" />
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required placeholder="you@example.com" />
+              <label for="msg">Message</label>
+              <textarea id="msg" name="message" rows="4" required placeholder="Tell me about your project..."></textarea>
+              <div style="display:flex; gap:.6rem; align-items:center;">
+                <button class="btn primary" id="sendBtn">Send</button>
+                <span id="formStatus" aria-live="polite" style="font-size:.9rem; color:var(--muted)"></span>
+              </div>
+            </form>
+          </div>
+          <div>
+            <div class="card" style="display:grid; gap:.6rem">
+              <h3>Direct</h3>
+              <a href="mailto:rahul.yadav.ext@everestgrp.com" class="btn ghost" style="justify-self:start">rahul.yadav.ext@everestgrp.com</a>
+              <p style="margin:0;color:var(--muted)">Based in Gurugram, Haryana, India</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap">
+      <small>© <span id="year"></span> Rahul Yadav. Designed & coded with care.</small>
+      <small>Typography: Inter · Code: JetBrains Mono · Following WCAG-friendly color contrast</small>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{ const id=a.getAttribute('href').slice(1); const el=document.getElementById(id); if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'});} });
+    });
+
+    // Theme toggle (respects system first)
+    const html = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const THEME_KEY = 'ry-theme';
+    const saved = localStorage.getItem(THEME_KEY);
+    if(saved) html.classList.add(saved);
+    toggle?.addEventListener('click',()=>{
+      const isDark = html.classList.toggle('theme-dark');
+      if(isDark) html.classList.remove('theme-light');
+      localStorage.setItem(THEME_KEY, isDark? 'theme-dark' : 'theme-light');
+      toggle.setAttribute('aria-pressed', String(isDark));
+    });
+
+    // Mobile menu
+    const menuBtn = document.querySelector('.menu-toggle');
+    const menu = document.getElementById('menu');
+    menuBtn?.addEventListener('click', ()=>{
+      const open = menu.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+
+    // Form demo (no backend): validate and give optimistic feedback
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+    const sendBtn = document.getElementById('sendBtn');
+    form?.querySelectorAll('input, textarea').forEach(el=>{
+      el.addEventListener('focus', ()=> el.parentElement?.classList?.add('focus'))
+      el.addEventListener('blur', ()=> el.parentElement?.classList?.remove('focus'))
+    })
+    sendBtn?.addEventListener('click',()=>{
+      if(!form.checkValidity()){ status.textContent='Please complete all fields.'; return; }
+      sendBtn.disabled = true; status.textContent='Sending…';
+      setTimeout(()=>{ status.textContent='Thanks! I\'ll reply soon.'; sendBtn.disabled=false; form.reset(); }, 900);
+    })
+
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Progressive enhancement: add inputs styling once JS is ready
+    const style = document.createElement('style');
+    style.textContent = `
+      form.card input, form.card textarea{ width:100%; background: var(--elev); color: var(--text); border:1px solid color-mix(in oklab, var(--text) 12%, transparent); border-radius:12px; padding:.8rem 1rem; font: inherit; }
+      form.card input:focus, form.card textarea:focus{ box-shadow: var(--ring); outline:none; }
+      form.card label{ font-weight:700; margin-top:.6rem; margin-bottom:.2rem; display:block; }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
